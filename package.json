@@ -1,0 +1,34 @@
+{
+  "name": "postgres-playground",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "d:connect": "docker exec -it playground-pg-app_container sh -c",
+    "d:up": "docker-compose -f docker-compose.yml up",
+    "d:down": "docker-compose -f docker-compose.yml down",
+    "d:restart": "npm run d:stop && npm run d:up",
+    "d:drop-db": "npm run d:connect 'psql -c \"drop schema public cascade; create schema public;\"'",
+    "-----------------------------------------------------------------------------------------------------------------------------------------------": "",
+    "d:clean:containers": "docker rm -f $(docker ps -a --filter name=^playground-pg- -q)",
+    "d:clean:dangling-images": "docker rmi $(docker images -f dangling=true -q)",
+    "d:clean:dangling-volumes": "docker volume rm $(docker volume ls -f dangling=true -q)",
+    "d:clean:full": "(npm run d:clean:containers || true) && (docker rmi playground-pg-app || true) && (npm run d:clean:dangling-volumes || true) && npm run d:clean:dangling-images",
+    "------------------------------------------------------------------------------":"",
+    "d:create-migration": "npm run d:connect 'npx prisma migrate dev --name init'",
+    "------------------------------------------------------------------------------------------------------------------------------------------------": "",
+    "d:ranking-rows": "npm run d:connect 'npx tsx --env-file=environments/.env.dev.pg src/playground/FEATURES/1-ranking-rows/index.ts'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "pg": "^8.14.1",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.11",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

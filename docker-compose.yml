@@ -1,0 +1,70 @@
+services:
+  # Backend API
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: development
+    container_name: playground-pg-app_container
+    restart: no
+    links:
+      - db
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - '3000:3000'
+    env_file:
+      - environments/.env.dev.pg
+      - environments/.env.dev
+    volumes:
+      - '.:/usr/src/app'
+      - /usr/src/app/node_modules # ignore node_modules from local computer (take into account only inside of docker image)
+    # networks:
+    #   - sxs-share_net
+
+  db:
+    image: 'postgres:latest'
+    container_name: playground-pg-db_container
+    restart: always
+    ports:
+      - '5433:5432'
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U postgres]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    env_file:
+      - environments/.env.dev.pg
+    volumes:
+      - 'playground-pg_data:/var/lib/postgresql/data'
+      # - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - './backups:/backups'
+    # networks:
+    #   - sxs-share_net
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: playground-pg-pgadmin4_container
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - '5051:80'
+    env_file:
+      - environments/.env.dev.pg
+    volumes:
+      - 'playground-pgadmin_data:/var/lib/pgadmin'
+    # networks:
+    #   - sxs-share_net
+    
+networks:
+  pizza-share-net:
+    driver: bridge
+
+volumes:
+  playground-pg_data:
+    driver: local
+  playground-pgadmin_data:
+    driver: local
