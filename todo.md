@@ -6,10 +6,12 @@
 
 
 ## Features
+[ ] Data migration in prod env using SQL
+[ ] Data migration in prod env using Prisma
 [ ] Simple common table expression (CTE)
 [ ] Recursive common table expression (RCTE)
 [ ] Correlated query
-[ ] Ranking rows
+[x] Ranking rows
 [ ] Stored procedure
 [ ] Window function
 [ ] Function
@@ -22,7 +24,7 @@
 
 
 ## Infra
-[ ] DB dockerization
+[x] DB dockerization
 [ ] Pure SQL migration
 [ ] DB backup
 [ ] DB restore

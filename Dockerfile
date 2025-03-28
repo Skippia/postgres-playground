@@ -12,6 +12,9 @@ COPY --chown=node:node package.json pnpm-lock.yaml ./
 # Install global packages
 RUN npm install -g pnpm
 
+# Install pg client
+RUN apk add --no-cache postgresql-client
+
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 

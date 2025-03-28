@@ -6,17 +6,21 @@
     "d:connect": "docker exec -it playground-pg-app_container sh -c",
     "d:up": "docker-compose -f docker-compose.yml up",
     "d:down": "docker-compose -f docker-compose.yml down",
-    "d:restart": "npm run d:stop && npm run d:up",
+    "d:restart": "npm run d:down && npm run d:up",
+    "d:restart-app": "docker-compose -f docker-compose.yml down app && docker-compose -f docker-compose.yml up app -d",
     "d:drop-db": "npm run d:connect 'psql -c \"drop schema public cascade; create schema public;\"'",
     "-----------------------------------------------------------------------------------------------------------------------------------------------": "",
     "d:clean:containers": "docker rm -f $(docker ps -a --filter name=^playground-pg- -q)",
     "d:clean:dangling-images": "docker rmi $(docker images -f dangling=true -q)",
     "d:clean:dangling-volumes": "docker volume rm $(docker volume ls -f dangling=true -q)",
-    "d:clean:full": "(npm run d:clean:containers || true) && (docker rmi playground-pg-app || true) && (npm run d:clean:dangling-volumes || true) && npm run d:clean:dangling-images",
-    "------------------------------------------------------------------------------":"",
-    "d:create-migration": "npm run d:connect 'npx prisma migrate dev --name init'",
+    "d:clean:full": "(npm run d:clean:containers || true) && (docker rmi postgres-playground-app || true) && (npm run d:clean:dangling-volumes || true) && (npm run d:clean:dangling-images || true)",
+    "------------------------------------------------------------------------------": "",
+    "d:create-migration": "npm run d:connect 'npx prisma migrate dev'",
+    "d:apply-migration": "npm run d:connect 'npx prisma migrate resolve --applied 0_init'",
+    "d:deploy": "npm run d:connect 'npx prisma deploy'",
     "------------------------------------------------------------------------------------------------------------------------------------------------": "",
-    "d:ranking-rows": "npm run d:connect 'npx tsx --env-file=environments/.env.dev.pg src/playground/FEATURES/1-ranking-rows/index.ts'"
+    "d:1-ranking-rows": "npm run d:connect 'sh ./src/playground/FEATURES/1-ranking-rows/init.sh'",
+    "d:2-correlated-query": "npm run d:connect 'sh ./src/playground/FEATURES/2-correlated-query/init.sh'"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +32,7 @@
   },
   "devDependencies": {
     "@types/pg": "^8.11.11",
+    "prisma": "^6.5.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   }
