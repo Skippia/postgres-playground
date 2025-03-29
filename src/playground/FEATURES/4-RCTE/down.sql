@@ -1,0 +1,6 @@
+BEGIN;
+
+DROP TABLE IF EXISTS followers;
+DROP TABLE IF EXISTS users;
+
+COMMIT;

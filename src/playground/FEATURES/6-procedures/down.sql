@@ -1,0 +1,8 @@
+BEGIN;
+
+DROP TABLE IF EXISTS volumes;
+DROP TABLE IF EXISTS mangas;
+DROP FUNCTION IF EXISTS get_all_volumes;
+DROP FUNCTION IF EXISTS get_manga_from_price;
+
+COMMIT;

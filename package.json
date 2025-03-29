@@ -20,7 +20,11 @@
     "d:deploy": "npm run d:connect 'npx prisma deploy'",
     "------------------------------------------------------------------------------------------------------------------------------------------------": "",
     "d:1-ranking-rows": "npm run d:connect 'sh ./src/playground/FEATURES/1-ranking-rows/init.sh'",
-    "d:2-correlated-query": "npm run d:connect 'sh ./src/playground/FEATURES/2-correlated-query/init.sh'"
+    "d:2-correlated-query": "npm run d:connect 'sh ./src/playground/FEATURES/2-correlated-query/init.sh'",
+    "d:3-CTE": "npm run d:connect 'sh ./src/playground/FEATURES/3-CTE/init.sh'",
+    "d:4-RCTE": "npm run d:connect 'sh ./src/playground/FEATURES/4-RCTE/init.sh'",
+    "d:5-functions": "npm run d:connect 'sh ./src/playground/FEATURES/5-functions/init.sh'",
+    "d:6-procedures": "npm run d:connect 'sh ./src/playground/FEATURES/6-procedures/init.sh'"
   },
   "keywords": [],
   "author": "",

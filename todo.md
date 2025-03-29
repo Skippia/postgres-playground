@@ -10,12 +10,11 @@
 [ ] Data migration in prod env using Prisma
 [ ] Simple common table expression (CTE)
 [ ] Recursive common table expression (RCTE)
-[ ] Correlated query
-[x] Ranking rows
+[x] Correlated query
+[x] Ranking rows + View
 [ ] Stored procedure
 [ ] Window function
 [ ] Function
-[ ] View
 [ ] Materialized VIEW + Trigger + Notification
 [ ] Full-text search
 [ ] JSONB usecase
