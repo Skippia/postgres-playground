@@ -24,8 +24,10 @@ services:
     #   - sxs-share_net
 
   db:
-    image: 'postgres:latest'
     container_name: playground-pg-db_container
+    build: 
+      context: .
+      dockerfile: db.Dockerfile
     restart: always
     ports:
       - '5433:5432'
@@ -38,8 +40,8 @@ services:
       - environments/.env.dev.pg
     volumes:
       - 'playground-pg_data:/var/lib/postgresql/data'
-      # - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
       - './backups:/backups'
+      # - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
     # networks:
     #   - sxs-share_net
 
