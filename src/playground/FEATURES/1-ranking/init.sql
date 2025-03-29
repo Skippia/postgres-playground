@@ -7,7 +7,6 @@ CREATE TABLE sales_data (
     sales_date DATE
 );
 
--- Data for Region "North"
 INSERT INTO
     sales_data (
         region,
@@ -58,7 +57,6 @@ VALUES (
         '2025-03-15'
     );
 
--- Data for Region "South"
 INSERT INTO
     sales_data (
         region,
