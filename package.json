@@ -9,6 +9,7 @@
     "d:restart": "npm run d:down && npm run d:up",
     "d:restart-app": "docker-compose -f docker-compose.yml down app && docker-compose -f docker-compose.yml up app -d",
     "d:drop-db": "npm run d:connect 'psql -c \"drop schema public cascade; create schema public;\"'",
+    "d:rebuild-db": "docker-compose -f docker-compose.yml down db && (docker rmi postgres-playground-db || true) && (docker volume rm postgres-playground_playground-pg_data -f || true) && docker-compose -f docker-compose.yml up --build --no-deps -d db",
     "-----------------------------------------------------------------------------------------------------------------------------------------------": "",
     "d:clean:containers": "docker rm -f $(docker ps -a --filter name=^playground-pg- -q)",
     "d:clean:dangling-images": "docker rmi $(docker images -f dangling=true -q)",
@@ -19,7 +20,7 @@
     "d:apply-migration": "npm run d:connect 'npx prisma migrate resolve --applied 0_init'",
     "d:deploy": "npm run d:connect 'npx prisma deploy'",
     "------------------------------------------------------------------------------------------------------------------------------------------------": "",
-    "d:1-ranking": "npm run d:connect 'sh ./src/playground/FEATURES/1-ranking/init.sh'",
+    "d:1-ranking_and_view": "npm run d:connect 'sh ./src/playground/FEATURES/1-ranking_and_view/init.sh'",
     "d:2-correlated-query": "npm run d:connect 'sh ./src/playground/FEATURES/2-correlated-query/init.sh'",
     "d:3-CTE": "npm run d:connect 'sh ./src/playground/FEATURES/3-CTE/init.sh'",
     "d:4-RCTE": "npm run d:connect 'sh ./src/playground/FEATURES/4-RCTE/init.sh'",
@@ -27,7 +28,9 @@
     "d:6-procedures": "npm run d:connect 'sh ./src/playground/FEATURES/6-procedures/init.sh'",
     "d:7-window-functions": "npm run d:connect 'sh ./src/playground/FEATURES/7-window-functions/init.sh'",
     "d:8-jsonb_with_MV_and_trigger": "npm run d:connect 'sh ./src/playground/FEATURES/8-jsonb_with_MV_and_trigger/init.sh'",
-    "d:9-pg-cron": "npm run d:connect 'sh ./src/playground/FEATURES/9-pg-cron/init.sh'"
+    "d:9-pg-cron": "npm run d:connect 'sh ./src/playground/FEATURES/9-pg-cron/init.sh'",
+    "d:10-full-text-search:1": "npm run d:connect 'sh ./src/playground/FEATURES/10-full-text-search/example-1/init.sh'",
+    "d:10-full-text-search:2": "npm run d:connect 'sh ./src/playground/FEATURES/10-full-text-search/example-2/init.sh'"
   },
   "keywords": [],
   "author": "",
