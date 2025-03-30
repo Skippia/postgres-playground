@@ -1,20 +1,4 @@
 BEGIN;
--- Create a product catalog with search capabilities
- 
--- This SQL query creates a product catalog table with intelligent search capabilities. 
--- The table includes basic fields like id, name, description, and an array of categories, 
--- but its key feature is the search_vector column, which automatically generates and stores a weighted search index. 
-
--- The search index combines three levels of search priority: 
---   - product names (weight 'A' for highest importance), 
---   - descriptions (weight 'B' for medium importance), 
---   - and categories (weight 'C' for lowest importance). 
-
--- The COALESCE functions prevent NULL values from breaking the index generation, while `array_to_string` converts 
--- the category array into searchable text. 
-
--- This structure allows for highly relevant search results where matches in the product name will rank higher
---  than matches in the description or categories.
 
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
