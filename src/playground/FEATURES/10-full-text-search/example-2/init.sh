@@ -4,8 +4,8 @@ set -e
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 FEATURE=$(basename "$SCRIPT_DIR")
 
-psql "$PG_URI" -f /usr/src/app/src/playground/FEATURES/${FEATURE}/up.sql
+psql "$PG_URI" -f /usr/src/app/src/playground/FEATURES/10-full-text-search/${FEATURE}/up.sql
 
-npx tsx --env-file=environments/.env.dev.pg src/playground/FEATURES/${FEATURE}/index.ts
+npx tsx --env-file=environments/.env.dev.pg src/playground/FEATURES/10-full-text-search/${FEATURE}/index.ts
 
-psql "$PG_URI" -f /usr/src/app/src/playground/FEATURES/${FEATURE}/down.sql
+psql "$PG_URI" -f /usr/src/app/src/playground/FEATURES/10-full-text-search/${FEATURE}/down.sql
