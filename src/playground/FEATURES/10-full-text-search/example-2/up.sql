@@ -1,7 +1,5 @@
 BEGIN;
 
-CREATE EXTENSION IF NOT EXISTS pg_cron;
-
 -- Create the search schema if it does not already exist
 CREATE SCHEMA IF NOT EXISTS search;
 

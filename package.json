@@ -10,6 +10,7 @@
     "d:restart": "npm run d:down && npm run d:up",
     "d:restart-app": "docker-compose -f docker-compose.yml down app && docker-compose -f docker-compose.yml up app -d",
     "d:drop-db": "npm run d:connect 'psql -c \"drop schema public cascade; create schema public;\"'",
+    "d:list-extensions": "npm run d:connect 'psql -c \"\\dx\"'",
     "d:rebuild-db": "docker-compose -f docker-compose.yml down db && (docker rmi postgres-playground-db || true) && (docker volume rm postgres-playground_playground-pg_data -f || true) && docker-compose -f docker-compose.yml up --build --no-deps -d db",
     "-----------------------------------------------------------------------------------------------------------------------------------------------": "",
     "d:clean:containers": "docker rm -f $(docker ps -a --filter name=^playground-pg- -q)",

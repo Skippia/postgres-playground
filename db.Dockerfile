@@ -1,22 +1,13 @@
-FROM postgres:16
+FROM postgres:15-bullseye AS build
 
 RUN apt-get update \
-&& apt-get install -y --no-install-recommends \
-    software-properties-common \
-    ca-certificates \
-    build-essential \
-    gnupg \
-    curl \
-    git \
-    make \
-    gcc \
-    clang \
-    pkg-config \
-    libopenblas-dev \
-    postgresql-server-dev-all \
-    postgresql-16-cron \
-&& rm -rf /var/lib/apt/lists/*
-
+    && apt-get install -f -y --no-install-recommends \
+        software-properties-common \
+        build-essential \
+        pkg-config \
+        git \
+        postgresql-server-dev-$PG_MAJOR \
+    && rm -rf /var/lib/apt/lists/*
 
 # Compile the plugin from sources and install it
 RUN git clone https://github.com/sraoss/pg_ivm.git -b v1.10 --single-branch \
@@ -25,8 +16,10 @@ RUN git clone https://github.com/sraoss/pg_ivm.git -b v1.10 --single-branch \
     && cd / \
     && rm -rf pg_ivm
 
+FROM postgres:15-bullseye
 
-RUN chmod 755 /docker-entrypoint-initdb.d/*
-RUN chown -R postgres:postgres /docker-entrypoint-initdb.d
+COPY --from=build /usr/lib/postgresql/$PG_MAJOR/lib/ /usr/lib/postgresql/$PG_MAJOR/lib/
+COPY --from=build /usr/share/postgresql/$PG_MAJOR/extension/pg_ivm.control /usr/share/postgresql/$PG_MAJOR/extension/
+COPY --from=build /usr/share/postgresql/$PG_MAJOR/extension/pg_ivm*.sql /usr/share/postgresql/$PG_MAJOR/extension/
 
-COPY init-db /docker-entrypoint-initdb.d
+COPY ./init-db /docker-entrypoint-initdb.d/
