@@ -9,7 +9,8 @@
 [x] JSONB usecase
 [x] Postgres cron operation
 [x] Full-text search
-[ ] Materialized VIEW + Trigger + Notification
+[x] Materialized VIEW + Trigger + Notification
+[ ] Fuzzy search
 
 ## Migrations
 [ ] Data migration in prod env using SQL
