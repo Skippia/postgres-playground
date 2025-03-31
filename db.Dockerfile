@@ -1,4 +1,4 @@
-FROM postgres:15-bullseye AS build
+FROM postgres:17-bullseye AS build
 
 RUN apt-get update \
     && apt-get install -f -y --no-install-recommends \
@@ -16,7 +16,7 @@ RUN git clone https://github.com/sraoss/pg_ivm.git -b v1.10 --single-branch \
     && cd / \
     && rm -rf pg_ivm
 
-FROM postgres:15-bullseye
+FROM postgres:17-bullseye
 
 COPY --from=build /usr/lib/postgresql/$PG_MAJOR/lib/ /usr/lib/postgresql/$PG_MAJOR/lib/
 COPY --from=build /usr/share/postgresql/$PG_MAJOR/extension/pg_ivm.control /usr/share/postgresql/$PG_MAJOR/extension/

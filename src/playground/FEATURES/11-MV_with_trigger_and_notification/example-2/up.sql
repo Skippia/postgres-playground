@@ -1,4 +1,4 @@
--- CREATE EXTENSION IF NOT EXISTS pg_ivm;
+CREATE EXTENSION IF NOT EXISTS pg_ivm;
 
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
@@ -8,14 +8,13 @@ CREATE TABLE orders (
     status TEXT NOT NULL DEFAULT 'pending'
 );
 
--- SELECT pgivm.create_immv (
---   'mv_orders_summary', `
---   SELECT
---     order_date::date AS order_day,
---     status,
---     COUNT(*) AS order_count,
---     SUM(total_amount) AS total_revenue
---   FROM orders
---   GROUP BY order_date::date, status`
---     );
-SELECT pgivm.create_immv('mv_orders_summary', 'SELECT * FROM orders');
+SELECT pgivm.create_immv (
+  'mv_orders_summary', 
+  'SELECT 
+     (order_date AT TIME ZONE ''UTC'')::date AS order_day,
+     status,
+     COUNT(*) AS order_count,
+     SUM(total_amount) AS total_revenue
+   FROM orders
+   GROUP BY (order_date AT TIME ZONE ''UTC'')::date, status;'
+);
