@@ -1,6 +1,7 @@
 {
   "name": "postgres-playground",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "d:connect": "docker exec -it playground-pg-app_container sh -c",
@@ -14,7 +15,7 @@
     "d:clean:containers": "docker rm -f $(docker ps -a --filter name=^playground-pg- -q)",
     "d:clean:dangling-images": "docker rmi $(docker images -f dangling=true -q)",
     "d:clean:dangling-volumes": "docker volume rm $(docker volume ls -f dangling=true -q)",
-    "d:clean:full": "(npm run d:clean:containers || true) && (docker rmi postgres-playground-app || true) && (npm run d:clean:dangling-volumes || true) && (npm run d:clean:dangling-images || true)",
+    "d:clean:full": "(npm run d:clean:containers || true) && (docker rmi postgres-playground-app || true) && (docker rmi postgres-playground-db || true) && (npm run d:clean:dangling-volumes || true) && (npm run d:clean:dangling-images || true)",
     "------------------------------------------------------------------------------": "",
     "d:create-migration": "npm run d:connect 'npx prisma migrate dev'",
     "d:apply-migration": "npm run d:connect 'npx prisma migrate resolve --applied 0_init'",
@@ -30,7 +31,9 @@
     "d:8-jsonb_with_MV_and_trigger": "npm run d:connect 'sh ./src/playground/FEATURES/8-jsonb_with_MV_and_trigger/init.sh'",
     "d:9-pg-cron": "npm run d:connect 'sh ./src/playground/FEATURES/9-pg-cron/init.sh'",
     "d:10-full-text-search:1": "npm run d:connect 'sh ./src/playground/FEATURES/10-full-text-search/example-1/init.sh'",
-    "d:10-full-text-search:2": "npm run d:connect 'sh ./src/playground/FEATURES/10-full-text-search/example-2/init.sh'"
+    "d:10-full-text-search:2": "npm run d:connect 'sh ./src/playground/FEATURES/10-full-text-search/example-2/init.sh'",
+    "d:11-MV_with_trigger_and_notification:1": "npm run d:connect 'sh ./src/playground/FEATURES/11-MV_with_trigger_and_notification/example-1/init.sh'",
+    "d:11-MV_with_trigger_and_notification:2": "npm run d:connect 'sh ./src/playground/FEATURES/11-MV_with_trigger_and_notification/example-2/init.sh'"
   },
   "keywords": [],
   "author": "",

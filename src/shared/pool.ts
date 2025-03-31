@@ -8,3 +8,6 @@ pg.types.setTypeParser(pg.types.builtins.INT8, (val) => Number(val))
 export const pool = new pg.Pool({
   connectionString: envPg.DB_URI,
 })
+
+export const client = await pool.connect()
+

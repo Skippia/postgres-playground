@@ -1,4 +1,5 @@
 import { pool } from '@/shared/pool'
+import process from 'node:process'
 
 export const main = async () => {
   try {
@@ -25,6 +26,8 @@ export const main = async () => {
       searchedPhraseExactOrder: searchedPhraseExactOrder.rows,
       searchedPhraseHeadline: searchedPhraseHeadline.rows
     })
+
+    process.exit(0)
   } catch (err) {
     console.log(err)
   }

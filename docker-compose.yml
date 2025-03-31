@@ -20,8 +20,6 @@ services:
     volumes:
       - '.:/usr/src/app'
       - /usr/src/app/node_modules # ignore node_modules from local computer (take into account only inside of docker image)
-    # networks:
-    #   - sxs-share_net
 
   db:
     container_name: playground-pg-db_container
@@ -42,8 +40,6 @@ services:
       - 'playground-pg_data:/var/lib/postgresql/data'
       - './backups:/backups'
       # - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
-    # networks:
-    #   - sxs-share_net
 
   pgadmin:
     image: dpage/pgadmin4
@@ -58,13 +54,7 @@ services:
       - environments/.env.dev.pg
     volumes:
       - 'playground-pgadmin_data:/var/lib/pgadmin'
-    # networks:
-    #   - sxs-share_net
     
-networks:
-  pizza-share-net:
-    driver: bridge
-
 volumes:
   playground-pg_data:
     driver: local

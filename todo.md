@@ -8,15 +8,15 @@
 [x] Window function
 [x] JSONB usecase
 [x] Postgres cron operation
-[ ] Full-text search
+[x] Full-text search
 [ ] Materialized VIEW + Trigger + Notification
-[ ] Huge migration using batching + streaming
 
 ## Migrations
 [ ] Data migration in prod env using SQL
   - create schema -> add indexes -> rename column
 [ ] Data migration in prod env using Prisma
   - create schema -> add indexes -> rename column
+[ ] Huge migration using batching + streaming
 
 ## Indexes
 [ ] Cluster index usecase
