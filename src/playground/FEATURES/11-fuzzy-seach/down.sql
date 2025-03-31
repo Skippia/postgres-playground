@@ -1,0 +1,8 @@
+BEGIN;
+
+DROP PROCEDURE IF EXISTS etl_job();
+DROP TABLE IF EXISTS production_data;
+DROP TABLE IF EXISTS staging_data;
+
+-- DROP EXTENSION IF EXISTS pg_cron;
+COMMIT;

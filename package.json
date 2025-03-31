@@ -33,8 +33,9 @@
     "d:9-pg-cron": "npm run d:connect 'sh ./src/playground/FEATURES/9-pg-cron/init.sh'",
     "d:10-full-text-search:1": "npm run d:connect 'sh ./src/playground/FEATURES/10-full-text-search/example-1/init.sh'",
     "d:10-full-text-search:2": "npm run d:connect 'sh ./src/playground/FEATURES/10-full-text-search/example-2/init.sh'",
-    "d:11-MV_with_trigger_and_notification:1": "npm run d:connect 'sh ./src/playground/FEATURES/11-MV_with_trigger_and_notification/example-1/init.sh'",
-    "d:11-MV_with_trigger_and_notification:2": "npm run d:connect 'sh ./src/playground/FEATURES/11-MV_with_trigger_and_notification/example-2/init.sh'"
+    "d:11-fuzzy-search": "npm run d:connect 'sh ./src/playground/FEATURES/11-fuzzy-search/init.sh'",
+    "d:12-MV_with_trigger_and_notification:1": "npm run d:connect 'sh ./src/playground/FEATURES/12-MV_with_trigger_and_notification/example-1/init.sh'",
+    "d:12-MV_with_trigger_and_notification:2": "npm run d:connect 'sh ./src/playground/FEATURES/12-MV_with_trigger_and_notification/example-2/init.sh'"
   },
   "keywords": [],
   "author": "",
