@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
+
   "scripts": {
     "d:connect": "docker exec -it playground-pg-app_container sh -c",
     "d:up": "docker-compose -f docker-compose.yml up",
     "d:down": "docker-compose -f docker-compose.yml down",
     "d:restart": "npm run d:down && npm run d:up",
     "d:restart-app": "docker-compose -f docker-compose.yml down app && docker-compose -f docker-compose.yml up app -d",
-    "d:drop-db": "npm run d:connect 'psql -c \"drop schema public cascade; create schema public;\"'",
-    "d:list-extensions": "npm run d:connect 'psql -c \"\\dx\"'",
+    "d:drop-db": "docker exec -it playground-pg-db_container sh -c 'psql -U postgres -c \"drop schema public cascade; create schema public;\"'",
+    "d:list-extensions": "docker exec -it playground-pg-db_container sh -c  'psql -U \"postgres\" -c \"\\dx\"'",
     "d:rebuild-db": "docker-compose -f docker-compose.yml down db && (docker rmi postgres-playground-db || true) && (docker volume rm postgres-playground_playground-pg_data -f || true) && docker-compose -f docker-compose.yml up --build --no-deps -d db",
     "-----------------------------------------------------------------------------------------------------------------------------------------------": "",
     "d:clean:containers": "docker rm -f $(docker ps -a --filter name=^playground-pg- -q)",
@@ -35,7 +36,9 @@
     "d:10-full-text-search:2": "npm run d:connect 'sh ./src/playground/FEATURES/10-full-text-search/example-2/init.sh'",
     "d:11-fuzzy-search": "npm run d:connect 'sh ./src/playground/FEATURES/11-fuzzy-search/init.sh'",
     "d:12-MV_with_trigger_and_notification:1": "npm run d:connect 'sh ./src/playground/FEATURES/12-MV_with_trigger_and_notification/example-1/init.sh'",
-    "d:12-MV_with_trigger_and_notification:2": "npm run d:connect 'sh ./src/playground/FEATURES/12-MV_with_trigger_and_notification/example-2/init.sh'"
+    "d:12-MV_with_trigger_and_notification:2": "npm run d:connect 'sh ./src/playground/FEATURES/12-MV_with_trigger_and_notification/example-2/init.sh'",
+    "-------------------------------------------------------------------------------------------------------------------------------------------------": "",
+    "d:1-exclusion-index": "npm run d:connect 'sh ./src/playground/INDEXES/1-exclusion-index/init.sh'"
   },
   "keywords": [],
   "author": "",
