@@ -11,6 +11,7 @@
 [x] Full-text search
 [ ] Fuzzy search
 [x] Materialized VIEW + Trigger + Notification
+[ ] Materialized VIEW as cache (timelines) + CDC (table-table stream JOIN)
 
 ## Migrations
 [ ] Data migration in prod env using SQL
@@ -20,7 +21,7 @@
 [ ] Huge migration using batching + streaming
 
 ## Indexes
-[ ] Exclusion constraint (index) usecase
+[x] Exclusion constraint (index) usecase
   - [Booking system](https://java-jedi.medium.com/exclusion-constraints-b2cbd62b637a) (preventing write skew for concurrent highload operations)
 [ ] Cluster index usecase
 [ ] Composite index usecase
